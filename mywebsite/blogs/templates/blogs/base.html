@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Blog</title>
+
+    <!-- BootStrap Styling Links -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Medium Style editor Links -->
+
+    <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+
+    <!-- Linking this HTML to our Own CSS -->
+    <link rel="stylesheet" href="{% static  'css/blogs.css' %}">
+
+    <!-- Fonts from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Bree+Serif&display=swap" rel="stylesheet">
+
+
+  </head>
+  <body class="loader">
+    <nav class="navbar navbar-default indieflower custom-navbar">
+      <div class="container">
+        <ul class='nav navbar-nav'>
+          <li> <a class="navbar-brand bigfont" href="{% url 'post_list' %}">MY FUCKING BLOG</a></li>
+          <li><a class="navbar-link" href="{% url 'about' %}">About Blog</a></li>
+          <li><a class="navbar-link" href="https://github.com/">GitHub REFERENCE</a></li>
+          <li><a class="navbar-link" href="https://www.quora.com/">Quora REFERENCE</a></li>
+          <li><a class="navbar-link" href="https://www.linkedin.com/">Linkedin REFERENCE</a></li>
+        </ul>
+        <ul class='nav navbar-nav navbar-right'>
+            <!-- These are the plugins imported from django Auth -->
+          {% if user.is_authenticated %}
+          <li><a class="navbar-link" href="{%url 'post_new' %}">NewPost</a></li>
+          <li><a class="navbar-link" href="{%url 'post_draft_list' %}">Drafts</a></li>
+          <li><a class="navbar-link" href="{%url 'logout' %}">SIGN-OFF</a></li>
+          <li><a> Hello!: {{user.username}}</a></li>
+
+          {% else %}
+          <li><a class="nav navbar-right" href="{%url 'login' %}"><span class="glyphicon glyphicon-heart"></span></a></li>
+
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Actual Content Containing BLogs -->
+    <div class="content container">
+        <div class="row">
+              <div class="col-md-8">
+                    <div class="container">
+                      {% block content %}
+                      {% endblock %}
+
+                    <!-- </div> -->
+
+                  </div>
+              </div>
+          </div>
+        <script type="text/javascript" src="{% static 'js/blogs.js' %}"></script>
+
+  </body>
+
+</html>

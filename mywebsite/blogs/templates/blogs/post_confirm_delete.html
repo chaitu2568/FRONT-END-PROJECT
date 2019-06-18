@@ -1,0 +1,7 @@
+{% extends 'blogs/base.html'%}
+{%block content%}
+<form method="POST">
+  <h1>Are you sure to delete the Post? {{object}}</h1>
+  <input type="submit" class="btn btn-danger" value="CONFIRM">
+</form>
+{%endblock%}
